@@ -11,6 +11,7 @@ export default function () {
         pay_way: Random.cword(2, 4),
         diagnosis_status: Random.pick(['待診','已却診','已初诊','诊毕']),
         patient_sex:Random.pick(['男','女']),
+
       };
       list.push(listObject);
     }
