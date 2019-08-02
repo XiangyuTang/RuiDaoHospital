@@ -7,7 +7,7 @@
             <b-card no-body class="p-4">
               <b-card-body>
                 <b-form>
-                  <h1>登录</h1>
+                  <h1>登录测试</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <b-form-group label-for="inputError2"
                                 label="用户名"
@@ -58,7 +58,7 @@
 
 <script>
   import {mapState, mapMutations} from 'vuex'
-  import userType from '../../config/userType'
+  // import userType from '../../config/userType'
   export default {
   name: 'Login',
   data:function() {
