@@ -2,12 +2,12 @@
   <div class="app flex-row align-items-center">
     <div class="container">
       <b-row class="justify-content-center">
-        <b-col md="8">
+        <b-col md="4">
           <b-card-group>
             <b-card no-body class="p-4">
               <b-card-body>
                 <b-form>
-                  <h1>登录测试</h1>
+                  <h1>HIS系统登录</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <b-form-group label-for="inputError2"
                                 label="用户名"
@@ -39,7 +39,7 @@
                 </b-form>
               </b-card-body>
             </b-card>
-            <b-card no-body class="text-white bg-primary py-5 d-md-down-none" style="width:44%">
+            <!-- <b-card no-body class="text-white bg-primary py-5 d-md-down-none" style="width:44%">
               <b-card-body class="text-left">
                 <div>
                   <h2>HIS门诊工作站</h2>
@@ -48,7 +48,7 @@
                   <b-button variant="primary" class="active mt-3">联系我们!</b-button>
                 </div>
               </b-card-body>
-            </b-card>
+            </b-card> -->
           </b-card-group>
         </b-col>
       </b-row>
@@ -58,11 +58,12 @@
 
 <script>
   import {mapState, mapMutations} from 'vuex'
-  // import userType from '../../config/userType'
+  import userType from '../../config/userType'
   export default {
   name: 'Login',
   data:function() {
   return {
+    usertype:userType,
     userName:undefined,
     password:undefined,
     dismissCountDown: 0,
@@ -91,38 +92,44 @@ computed:{
     },
 
     submitLogin(){
-      console.log("click");
-      let data= {
-        userLoginName: this.userName,
-        password: this.password
-      };
-      console.log(data);
-      this.$router.push("/" + data.userLoginName);
-      this.set_curr_user_type(data.userLoginName)
-      // this.$get('/login/LoginUser', data).then(res=>{
-      //   console.log(res);
-      //   if(res.status === "OK" && res.data.role.roleId >=0 && res.data.role.roleId <= userType.length){
-      //     this.set_curr_user_type(userType[res.data.role.roleId]);
-      //     this.set_curr_user(res.data.user);
-      //     this.set_curr_user_id(res.data.user.userId);
-      //     this.set_curr_dept(res.data.department);
-      //     this.set_curr_role(res.data.role);
-      //
-      //   }else{
-      //     this.message="用户名或密码错误";
-      //     this.alertLoginFail();
-      //   }
-      // }).catch(()=>{
-      //   this.message = "网络连接异常";
-      //   this.alertLoginFail();
-      // });
+      //alert(this.userName+this.password);
+      if(this.userName==null||this.userName=="")
+      {
+        this.message="用户名不能为空！";
+        this.alertLoginFail();
+        return;
+      }
+      else if(this.password==null||this.password=="")
+      {
+        this.message="密码不能为空！";
+        this.alertLoginFail();
+        return;
+      }
+      else if(this.password!=this.userName||!(this.usertype.includes(this.userName)))
+      {
+        this.message="用户名或密码不正确";
+        this.alertLoginFail();
+        return;
+      }
+      else
+      {
+        //alert(this.usertype)
+        console.log("click");
+        let data= {
+          userLoginName: this.userName,
+          password: this.password
+        };
+        console.log(data);
+        this.$router.push("/" + data.userLoginName);
+        this.set_curr_user_type(data.userLoginName)
+
+      }
     },
     forgetPass(){//忘记密码
-
     },
     alertLoginFail(){//弹出登陆失败的对话框
       this.dismissCountDown = this.defaultDismissDes;
-    },
+    }
   }
 }
 </script>
