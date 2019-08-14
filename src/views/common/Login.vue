@@ -14,14 +14,14 @@
                                 validated
                                 :invalid-feedback="errors.first('userName')"
                                 :valid-feedback="validFeedback">
-                    <b-form-input v-validate="'required'" name="userName" v-model="userName" type="text" class="form-control-warning" id="inputError2" required></b-form-input>
+                    <b-form-input v-validate="'required'" name="userName" v-model="userName" type="text" class="form-control-warning" id="inputError2" placeholder="输入您的用户名.." required v-focus></b-form-input>
                   </b-form-group>
                   <b-form-group validated
                                 label="密码"
                                 label-for="normalPass"
                                 v-bind:invalid-feedback="errors.first('password')"
                                 v-bind:valid-feedback="validFeedback">
-                    <b-form-input v-validate="'required'" v-model="password" name="password" id="normalPass" type="password" placeholder="Enter Password.." required autocomplete="current-password"></b-form-input>
+                    <b-form-input v-validate="'required'" v-model="password" name="password" id="normalPass" type="password" placeholder="输入您的密码.." required autocomplete="current-password" @keyup.enter="submitLogin()"></b-form-input>
                   </b-form-group>
                   <b-row>
                     <b-col cols="12">

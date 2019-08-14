@@ -19,12 +19,15 @@ Vue.prototype.$post=post;
 
 Vue.prototype.$moment = moment;
 
-
 Vue.use(BootstrapVue);
 Vue.use(VeeValidate);
 Vue.use(Vuex);
 // Vue.use(Vuetree);
-
+Vue.directive('focus',{
+  inserted:function(el){
+    el.focus();
+  }
+})
 if (process.env.NODE_ENV === 'development') {
   start_mock();
 }
