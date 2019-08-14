@@ -14,7 +14,7 @@
                                 validated
                                 :invalid-feedback="errors.first('userName')"
                                 :valid-feedback="validFeedback">
-                    <b-form-input v-validate="'required'" name="userName" v-model="userName" type="text" class="form-control-warning" id="inputError2" placeholder="输入您的用户名.." required v-focus></b-form-input>
+                    <b-form-input v-validate="'required'" name="userName" v-model="userName" type="text" class="form-control-warning" id="inputError2" placeholder="输入您的用户名.." required v-focus @keyup.enter="submitLogin()"></b-form-input>
                   </b-form-group>
                   <b-form-group validated
                                 label="密码"
