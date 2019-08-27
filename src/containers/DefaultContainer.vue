@@ -21,7 +21,7 @@
       <main class="main">
         <div class="row mt-3"></div>
         <div class="container-fluid">
-          <router-view></router-view>
+          <router-view v-if="isRouterAlive"></router-view>
         </div>
       </main>
       <AppAside fixed>
@@ -51,6 +51,11 @@ import {mapState} from 'vuex'
 import DefaultDropdownNav from './DefaultDropdownNav'
 
 export default {
+  provide(){
+    return{
+      reload:this.reload
+    };
+  },
   name: 'DefaultContainer',
   components: {
     DefaultDropdownNav,
@@ -70,7 +75,17 @@ export default {
     SidebarMinimizer
   },
   data () {
-    return {}
+    return {
+      isRouterAlive:true
+    }
+  },
+  methods:{
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(function(){
+        this.isRouterAlive = true;
+      })
+    }
   },
   computed: {
     name () {

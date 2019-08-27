@@ -6,7 +6,7 @@ export default function () {
     let list = [];
     for(let i = 0; i < 100; i++) {
       let listObject = {
-        medical_record_id: Random.integer(2019062000, 2019062100),
+        medical_record_id: Random.integer(2019082000, 2019082100),
         patient_name: Random.cword(2, 3),
         pay_way: Random.cword(2, 4),
         diagnosis_status: Random.pick(['待診','已却診','已初诊','诊毕']),

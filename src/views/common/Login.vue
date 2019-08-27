@@ -9,14 +9,13 @@
                 <b-form>
                   <h1>HIS系统登录</h1>
                   <p class="text-muted">Sign In to your account</p>
-                  <b-form-group label-for="inputError2"
+                  <b-form-group
+                                label-for="inputError2"
                                 label="用户名"
-                                validated
-                                :invalid-feedback="errors.first('userName')"
                                 :valid-feedback="validFeedback">
-                    <b-form-input v-validate="'required'" name="userName" v-model="userName" type="text" class="form-control-warning" id="inputError2" placeholder="输入您的用户名.." required v-focus @keyup.enter="submitLogin()"></b-form-input>
+                    <input v-validate="'required'" name="userName" v-model="userName" type="text" class="form-control" id="inputError2" placeholder="输入您的用户名.." required v-focus @keyup.enter="submitLogin()"></b-form-input>
                   </b-form-group>
-                  <b-form-group validated
+                  <b-form-group
                                 label="密码"
                                 label-for="normalPass"
                                 v-bind:invalid-feedback="errors.first('password')"

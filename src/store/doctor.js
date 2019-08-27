@@ -11,7 +11,12 @@ export default {
     medicalRecord:{},//当前病历
     registration:{medicalRecord:1},//当前挂号
     // date:new Date(),
-    medicalRecordState:''//当前就诊状态 未初诊 已初诊 已终诊 诊毕
+    medicalRecordState:'',//当前就诊状态 未初诊 已初诊 已终诊 诊毕
+    // curr_user_type:'233',
+    // curr_user_id:234,
+    // curr_user:"234",
+    // curr_role:"野兽",
+    // curr_dept:"哈哈哈",
   },
   //通过store.state.count获取值
   //当一个组件需要获取多个状态时候,可以使用 mapState 辅助函数帮助我们生成计算属性

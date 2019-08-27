@@ -1,7 +1,7 @@
+
 <template>
   <div class="animated fadeIn">
     <b-row>
-
       <b-col lg="12">
         <patient-info
          ref="patientInfo"
@@ -12,26 +12,30 @@
 
       <b-col lg="3">
         <!--  挂号列表-->
+        <transition><!-- enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" -->
         <registration-list
+          v-if="openPatientFlag"
           ref="registrationList"
           @selectPatient="selectPatient"
         >
         </registration-list>
+        </transition>
         <!--    病历模板-->
-        <medical-record-template
+        <!-- <medical-record-template
           ref="medical-record-template-cite"
           @onCite="onCite"
-        >
+        > -->
 
         </medical-record-template>
 
       </b-col>
-      <b-col lg="9">
+      <transition name="mainpage">
+      <b-col :lg="openPatientFlag?'9':'12'"><!-- v-if="openPatientFlag" -->
         <b-row>
           <b-col lg="12">
           <b-card header="基本信息" >
             <div slot="header"><!-- slot设置插槽便于模板数据的精准插入-->
-              填写模块
+              <a href="#" @click.prevent="choosePatient"><i :class="openPatientFlag?'fa fa-angle-double-left fa-lg':'fa fa-angle-double-right fa-lg'" ref="switchDoor">  选择患者</i>  </a>
               <div class="card-header-actions">
                 <b-button-group class="pull-right" ><!-- 此处为清空暂存提交按钮 -->
                   <b-button size="sm" @click="medicalRecordReset" :disabled="this.ifReadonly" variant="danger"><i class="fa fa-undo"></i> 清空</b-button>
@@ -159,11 +163,14 @@
           </b-col>
         </b-row>
       </b-col>
+      </transition>
     </b-row>
   </div>
 </template>
 
 <script>
+
+
     import PatientInfo from "./component/patientInfo";//患者信息
     import MedicalRecordTemplate from "./component/medicalRecordTemplate";//病历模板
     import ChineseDiagnosis from "./component/diagnosis";//中医诊断
@@ -207,7 +214,8 @@
               { text: '个人', value: '1' },
               { text: '科室', value: '2' },
               { text: '全院', value: '3' },
-            ]
+            ],
+            openPatientFlag:true
           }
       },
       computed:{
@@ -380,10 +388,43 @@
             alert("患者已经初诊,不能引用模板");
           }
         },
+        choosePatient(){
+          if(this.openPatientFlag){
+            this.openPatientFlag = !this.openPatientFlag;
+            console.log(this.openPatientFlag);
+
+          }else{
+            this.openPatientFlag = !this.openPatientFlag;
+            console.log(this.openPatientFlag);
+          }
+
+        }
       }
     }
 </script>
 
 <style scoped>
+/*  .v-move{
+  transition:all 1s ease;
+} */
+.v-enter,
+.v-leave-to{
+  opacity:0;
+  transform: translateX(-200px);
+}
+.v-enter-active,
+.v-leave-active{
+  transition:all 1s ease;
+  position:absolute;
+}
 
+.mainpage-enter,
+.mainpage-leave-to{
+  transform: translateX(-20px);
+}
+.mainpage-enter-active,
+.mainpage-leave-active{
+  transition:all 1s ease;
+  /* position:absolute; */
+}
 </style>

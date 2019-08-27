@@ -3,16 +3,28 @@
     <div slot="header">
       <strong>患者列表</strong>
     </div>
+    <div >
+      <b-card class="mb-3 text-center" no-body >
+        <b-row >
+          <b-col>
+            <span><i class="fa fa-user"> 已选患者</i> : emmm</span>
+           </b-col >
+           <b-col lg=4>
+             <span><a href="#" @click.prevent="refresh"><i class="fa fa-refresh fa-fw"></i></a></span>
+          </b-col>
+        </b-row>
+      </b-card>
+    </div>
     <b-tabs @input="changeTab">
       <!-- changeTab更换tab 个人/科室挂号列表 -->
       <b-tab v-for="(tab, index) in registrationTabs" :title="tab.title" :key="index" :active="index === currentTab" >
       <!-- 分别存放tab的内容-->
         <b-row>
-          <b-col sm="8" class="my-1">
+          <b-col sm="12" class="my-1">
             <b-input-group>
               <b-form-input
                 v-model="filter"
-                placeholder="请输入..."
+                placeholder="请输入患者名..."
                 size="sm"
               ></b-form-input>
               <b-input-group-append>
@@ -25,52 +37,100 @@
               </b-input-group-append>
             </b-input-group>
           </b-col>
-
-          <b-col sm="4" class="my-1">
-            <b-form-select
-              v-model="perPage"
-              :options="pageOptions"
-              size="sm"
-            ></b-form-select>
-          </b-col>
         </b-row>
         <br>
+        <div role="tablist">
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block href="#" v-b-toggle.accordion-1 variant="info"><font color="aliceblue">未诊患者</font></b-button>
+            </b-card-header>
+            <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+              <b-card-body>
+                <b-table
+                  selectable
+                  select-mode="single"
+                  show-empty
+                  hover
+                  :aria-busy="isBusy"
+                  :items="items"
+                  :fields="registrationFields"
+                  :current-page="currentPage"
+                  :per-page="perPage"
+                  :filter="filter"
+                  :sort-by.sync="sortBy"
+                  :sort-desc.sync="sortDesc"
+                  :sort-direction="sortDirection"
+                  @filtered="onFiltered"
+                  @row-selected="selectPatient">
+                  <!-- @filtered当本地筛选导致项目数发生变化时发出。-->
+                  <!-- 自定义诊断的展示格式 -->
+                  <template slot="medicalRecordState" slot-scope="row">
+                    {{transformMedicalRecordState(row.item)}}
+                  </template>
+                </b-table>
+                <!--页码-->
+                <b-row>
+                  <b-col md="12" class="my-1">
+                    <b-pagination
+                      v-model="currentPage"
+                      :total-rows="total"
+                      :per-page="perPage"
+                      class="my-0"
+                      size="sm"
+                      align="center"
+                    ></b-pagination>
+                  </b-col>
+                </b-row>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block href="#" v-b-toggle.accordion-2 variant="info"><font color="aliceblue">已诊患者</font></b-button>
+            </b-card-header>
+            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+              <b-card-body>
+                  <b-table
+                    selectable
+                    select-mode="single"
+                    show-empty
+                    hover
+                    :aria-busy="isBusy"
+                    :items="items"
+                    :fields="registrationFields"
+                    :current-page="currentPage"
+                    :per-page="perPage"
+                    :filter="filter"
+                    :sort-by.sync="sortBy"
+                    :sort-desc.sync="sortDesc"
+                    :sort-direction="sortDirection"
+                    @filtered="onFiltered"
+                    @row-selected="selectPatient">
+                    <!-- @filtered当本地筛选导致项目数发生变化时发出。-->
+                    <!-- 自定义诊断的展示格式 -->
+                    <template slot="medicalRecordState" slot-scope="row">
+                      {{transformMedicalRecordState(row.item)}}
+                    </template>
+                  </b-table>
+                  <!--页码-->
+                  <b-row>
+                    <b-col md="12" class="my-1">
+                      <b-pagination
+                        v-model="currentPage"
+                        :total-rows="total"
+                        :per-page="perPage"
+                        class="my-0"
+                        size="sm"
+                        align="center"
+                      ></b-pagination>
+                    </b-col>
+                  </b-row>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+        </div>
         <!-- Main table element -->
-        <b-table
-          selectable
-          select-mode="single"
-          show-empty
-          hover
-          :aria-busy="isBusy"
-          :items="items"
-          :fields="registrationFields"
-          :current-page="currentPage"
-          :per-page="perPage"
-          :filter="filter"
-          :sort-by.sync="sortBy"
-          :sort-desc.sync="sortDesc"
-          :sort-direction="sortDirection"
-          @filtered="onFiltered"
-          @row-selected="selectPatient">
-          <!-- @filtered当本地筛选导致项目数发生变化时发出。-->
-          <!-- 自定义诊断的展示格式 -->
-          <template slot="medicalRecordState" slot-scope="row">
-            {{transformMedicalRecordState(row.item)}}
-          </template>
-        </b-table>
-        <!--页码-->
-        <b-row>
-          <b-col md="12" class="my-1">
-            <b-pagination
-              v-model="currentPage"
-              :total-rows="total"
-              :per-page="perPage"
-              class="my-0"
-              size="sm"
-              align="center"
-            ></b-pagination>
-          </b-col>
-        </b-row>
       </b-tab>
     </b-tabs>
   </b-card>
@@ -80,6 +140,7 @@
   import {mapState,mapMutations} from 'vuex';
     export default {
       name: "registrationList",
+      inject:["reload"],
       data() {
         return {
           isBusy: false,
@@ -109,7 +170,7 @@
           registrationFields: [
             {key: 'medicalRecordId', label: '病历号', sortable: true},
             {key: 'patient.patientName', label: '姓名', sortable: true},
-            {key: 'medicalRecordState', label:'状态', sortable: true},
+            // {key: 'medicalRecordState', label:'状态', sortable: true},
           ],
         }
       },
@@ -200,6 +261,9 @@
             }
           });
         },
+        refresh(){
+          this.reload();
+        }
       }
     }
 </script>

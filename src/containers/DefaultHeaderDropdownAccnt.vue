@@ -34,7 +34,11 @@ export default {
     AppHeaderDropdown
   },
   data: () => {
-    return {}
+    return {
+    curr_user:{userName:'王忠勇'},
+    curr_dept:{departmentName:'骨科'},
+    curr_role:{roleName:'医生'}
+	}
   },
   computed:{
     ...mapState("common",['curr_user']),

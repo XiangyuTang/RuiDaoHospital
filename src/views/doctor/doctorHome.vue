@@ -121,6 +121,7 @@
       components: {PatientInfo, PatientTable},
       data: () => {
           return{
+            flag:false,
             tabs:[{
               title:"个人",
               getPatientApi:"getPatientList",
