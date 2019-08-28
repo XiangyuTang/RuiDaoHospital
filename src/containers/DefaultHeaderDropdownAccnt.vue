@@ -35,15 +35,15 @@ export default {
   },
   data: () => {
     return {
-    curr_user:{userName:'王忠勇'},
+    curr_user:{userName:'王忠勇',userId:'1'},
     curr_dept:{departmentName:'骨科'},
     curr_role:{roleName:'医生'}
 	}
   },
   computed:{
-    ...mapState("common",['curr_user']),
-    ...mapState("common",['curr_dept']),
-    ...mapState("common",['curr_role']),
+    // ...mapState("common",['curr_user']),
+    // ...mapState("common",['curr_dept']),
+    // ...mapState("common",['curr_role']),
   },
   methods:{
     logout(){

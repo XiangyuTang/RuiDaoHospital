@@ -84,16 +84,18 @@
           console.log("请求患者列表");
           let data = this.tabs[this.currentTab].getPatientParams;
           data['page'] = page;
-          console.log(data);
-          this.$get(this.tabs[this.currentTab].getPatientApi, data).then(res=>{
-            console.log(res);
-            if(res.code === true){
-              this.items = res.data;
-              this.isBusy = false;
-            }else{
-              console.log("加载失败");
-            }
-          });
+          console.log(data.eval());
+          // this.$get(this.tabs[this.currentTab].getPatientApi, data).then(res=>{
+          //   console.log(res);
+          //   if(res.code === true){
+          //     this.items = res.data;
+          //     this.isBusy = false;
+          //   }else{
+          //     console.log("加载失败");
+          //   }
+          // });
+          this.items = [{'111','222'},{'333','444'}];
+          this.isBusy = false;
         },
         countPatient(){
           console.log("请求患者总数");

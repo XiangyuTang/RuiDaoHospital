@@ -6,12 +6,13 @@
     <div >
       <b-card class="mb-3 text-center" no-body >
         <b-row >
-          <b-col>
+          <b-col >
             <span><i class="fa fa-user"> 已选患者</i> : emmm</span>
+            &nbsp;
+            <span><a href="#" @click.prevent="refresh"><i class="fa fa-refresh fa-fw"></i></a></span>
            </b-col >
-           <b-col lg=4>
-             <span><a href="#" @click.prevent="refresh"><i class="fa fa-refresh fa-fw"></i></a></span>
-          </b-col>
+
+
         </b-row>
       </b-card>
     </div>
@@ -53,7 +54,7 @@
                   hover
                   :aria-busy="isBusy"
                   :items="items"
-                  :fields="registrationFields"
+                  :fields1="registrationFields"
                   :current-page="currentPage"
                   :per-page="perPage"
                   :filter="filter"
@@ -98,7 +99,7 @@
                     hover
                     :aria-busy="isBusy"
                     :items="items"
-                    :fields="registrationFields"
+                    :fields1="registrationFields"
                     :current-page="currentPage"
                     :per-page="perPage"
                     :filter="filter"
@@ -143,6 +144,7 @@
       inject:["reload"],
       data() {
         return {
+          curr_user:{medicalRecordId:'001',userId:'001',patientGender : '男'},
           isBusy: false,
           items:[],
           total:1,
@@ -218,28 +220,46 @@
           data.medicalRecordId = patient[0].registrationId;
           data.userId = this.curr_user.userId;
           console.log(data);
+          // this.$get(this.registrationTabs[this.currentTab].getChangeRegistrationApi, data).then(res=>{
+          //   console.log(res);
+          //   if(res.status === "OK"){
+          //     console.log(patient[0]);
+          //     this.isBusy = false;
+          //     this.updateMedicalRecordState(this.transformMedicalRecordState(patient[0]));//更新就诊状态
+          //     this.updateRegistration(patient[0]);
+          //     //更新已选择的状态   用于显示
+          //     let selectedPatientItems = {};
+          //     selectedPatientItems.calculationTypeId = patient[0].calculationTypeId;//转义结算类别
+          //     selectedPatientItems.patientGender = patient[0].patient.patientGender;//获得性别
+          //     selectedPatientItems.medicalRecordId = patient[0].medicalRecordId;//病历ID
+          //     selectedPatientItems.patientName = patient[0].patient.patientName;//名字
+          //     selectedPatientItems.medicalRecordState = this.medicalRecordState;//诊断状态
+          //     this.updatePatient(selectedPatientItems);//更新vuex中的patient对象
+          //     this.$emit('selectPatient', patient[0]);
+          //   }else{
+          //     alert("切换失败");
+          //     console.log("加载失败");
+          //   }
+          // });
+          this.isBusy = false;
 
-          this.$get(this.registrationTabs[this.currentTab].getChangeRegistrationApi, data).then(res=>{
-            console.log(res);
-            if(res.status === "OK"){
-              console.log(patient[0]);
-              this.isBusy = false;
-              this.updateMedicalRecordState(this.transformMedicalRecordState(patient[0]));//更新就诊状态
-              this.updateRegistration(patient[0]);
-              //更新已选择的状态   用于显示
-              let selectedPatientItems = {};
-              selectedPatientItems.calculationTypeId = patient[0].calculationTypeId;//转义结算类别
-              selectedPatientItems.patientGender = patient[0].patient.patientGender;//获得性别
-              selectedPatientItems.medicalRecordId = patient[0].medicalRecordId;//病历ID
-              selectedPatientItems.patientName = patient[0].patient.patientName;//名字
-              selectedPatientItems.medicalRecordState = this.medicalRecordState;//诊断状态
-              this.updatePatient(selectedPatientItems);//更新vuex中的patient对象
-              this.$emit('selectPatient', patient[0]);
-            }else{
-              alert("切换失败");
-              console.log("加载失败");
-            }
-          });
+          patient[0].calculationTypeId = 1;
+          patient[0].patient.patientGender = '1'//this.curr_user.patientGender;
+          patient[0].medicalRecordId = '20190828001';
+          patient[0].patient.patientName = '黄方';
+          this.medicalRecordState = '确诊';
+
+          this.updateMedicalRecordState(this.transformMedicalRecordState(patient[0]));//更新就诊状态
+          this.updateRegistration(patient[0]);
+          //更新已选择的状态   用于显示
+          let selectedPatientItems = {};
+          selectedPatientItems.calculationTypeId = patient[0].calculationTypeId;//转义结算类别
+          selectedPatientItems.patientGender = patient[0].patient.patientGender;//获得性别
+          selectedPatientItems.medicalRecordId = patient[0].medicalRecordId;//病历ID
+          selectedPatientItems.patientName = patient[0].patient.patientName;//名字
+          selectedPatientItems.medicalRecordState = this.medicalRecordState;//诊断状态
+          this.updatePatient(selectedPatientItems);//更新vuex中的patient对象
+          this.$emit('selectPatient', patient[0]);
         },
         async changeTab(index){
           this.currentTab = index;
@@ -249,17 +269,24 @@
           console.log("请求患者列表");
           let data = this.registrationTabs[this.currentTab].getRegistrationParams;
           console.log(data);
+          //this.curr_user.userId = 1;
           this.registrationTabs[this.currentTab].getRegistrationParams.userId = this.curr_user.userId;
-          this.$get(this.registrationTabs[this.currentTab].getRegistrationApi, data).then(res=>{
-            console.log(res);
-            if(res.status === "OK"){
-              this.items = res.data;//填充患者列表数据
-              this.total = this.items.length;//得到当前的总数
-              this.isBusy = false;
-            }else{
-              console.log("加载失败");
-            }
-          });
+          // this.$get(this.registrationTabs[this.currentTab].getRegistrationApi, data).then(res=>{
+          //   console.log(res);
+          //   if(res.status === "OK"){
+          //     this.items = res.data;//填充患者列表数据
+          //     this.total = this.items.length;//得到当前的总数
+          //     this.isBusy = false;
+          //   }else{
+          //     console.log("加载失败");
+          //   }
+          // });
+          this.items = [{病历号:'20190828001',姓名:'黄方'},{病历号:'20190828002',姓名:'霍飞'},
+                        {病历号:'20190828003',姓名:'冯水'},{病历号:'20190828004',姓名:'张弛'},
+                       {病历号:'20190828005',姓名:'何甜甜'},{病历号:'20190828006',姓名:'康有'},
+                       {病历号:'20190828007',姓名:'刘严飞'}];
+          this.total = this.items.length;
+          this.isBusy = false;
         },
         refresh(){
           this.reload();

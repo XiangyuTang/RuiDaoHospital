@@ -10,7 +10,7 @@
     </b-row>
     <b-row>
 
-      <b-col lg="3">
+      <b-col lg="4">
         <!--  挂号列表-->
         <transition><!-- enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" -->
         <registration-list
@@ -29,8 +29,8 @@
         </medical-record-template>
 
       </b-col>
-      <transition name="mainpage">
-      <b-col :lg="openPatientFlag?'9':'12'"><!-- v-if="openPatientFlag" -->
+      <!-- <transition name="mainpage"> -->
+      <b-col :lg="openPatientFlag?'8':'12'"><!-- v-if="openPatientFlag" -->
         <b-row>
           <b-col lg="12">
           <b-card header="基本信息" >
@@ -163,7 +163,7 @@
           </b-col>
         </b-row>
       </b-col>
-      </transition>
+      <!-- </transition> -->
     </b-row>
   </div>
 </template>
@@ -410,21 +410,24 @@
 .v-enter,
 .v-leave-to{
   opacity:0;
-  transform: translateX(-200px);
+  transform: translateX(-500px);
 }
-.v-enter-active,
+.v-enter-active{
+  transition:all 0.8s ease;
+}
 .v-leave-active{
-  transition:all 1s ease;
+  transition:all 0.5s ease;
   position:absolute;
 }
+
 
 .mainpage-enter,
 .mainpage-leave-to{
   transform: translateX(-20px);
 }
-.mainpage-enter-active,
+/* .mainpage-enter-active,
 .mainpage-leave-active{
   transition:all 1s ease;
   /* position:absolute; */
-}
+/*} */
 </style>

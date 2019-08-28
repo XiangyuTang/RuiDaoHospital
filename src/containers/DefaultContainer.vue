@@ -1,14 +1,14 @@
 <template>
   <div class="app">
     <app-header fixed>
-      <b-navbar-nav class="md-auto">
+      <!-- <b-navbar-nav class="md-auto">
         <DefaultDropdownNav/>
-      </b-navbar-nav>
+      </b-navbar-nav> -->
       <b-link class="navbar-brand" to="#">
         <img class="navbar-brand-full" src="img/brand/logo.svg" width="80" height="40" alt="CoreUI Logo">
         <!--<img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">-->
       </b-link>
-      <b-navbar-nav class="d-md-down-none">
+      <b-navbar-nav >
         <b-nav-item v-for="(item, index) in nav" :key ="index" class="px-3" :to="item.url" active-class="text-primary">
           {{item.name}}
         </b-nav-item>
