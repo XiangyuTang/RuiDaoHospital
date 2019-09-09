@@ -39,7 +39,7 @@
               <div class="card-header-actions">
                 <b-button-group class="pull-right" ><!-- 此处为清空暂存提交按钮 -->
                   <b-button size="sm" @click="medicalRecordReset" :disabled="this.ifReadonly" variant="danger"><i class="fa fa-undo"></i> 清空</b-button>
-                  <b-button size="sm" @click="medicalRecordSave" :disabled="this.ifReadonly" class="d-sm-down-none" variant="primary"><i class="fa fa-save"></i> 存档</b-button>
+                  <b-button size="sm" @click="medicalRecordSave" :disabled="this.ifReadonly" class="d-sm-down-none" variant="primary"><i class="fa fa-save"></i> 暂存</b-button>
                   <b-button size="sm" @click="medicalRecordSubmit" :disabled="this.ifReadonly"  class="d-sm-down-none" variant="success"><i class="fa fa-check"></i> 提交</b-button>
                 </b-button-group>
               </div>
@@ -272,7 +272,7 @@
             this.ifReadonly = true;//如果不是未初诊 则更改为只读
             this.ifSeen = false;//改为不可见
           }else{
-            this.medicalRecordReset();//清空
+            //this.medicalRecordReset();//清空
             this.ifReadonly = false;//如果未初诊 则改为可编辑
             this.ifSeen = true;//改为可见
           }
@@ -340,19 +340,23 @@
           this.$refs["medical-record-template"].show();
         },
         medicalRecordReset(){
-          this.firstChineseDiagnosisItems=[];
-          this.firstWesternDiagnosisItems=[];
-          this.medicalRecordHomePage = {
-            medicalRecordId:this.medicalRecord.medicalRecordId,
-            doctorId:this.medicalRecord.doctorId,
-            chiefComplaint:'',
-            presentHistory:'',
-            presentTreatment:'',
-            pastHistory:'',
-            allergicHistory:'',
-            physicalExamination:'',
-            assistantExamination:'',
-          };
+          if(confirm("确认清空吗？"))
+          {
+            this.firstChineseDiagnosisItems=[];
+            this.firstWesternDiagnosisItems=[];
+            this.medicalRecordHomePage = {
+              medicalRecordId:this.medicalRecord.medicalRecordId,
+              doctorId:this.medicalRecord.doctorId,
+              chiefComplaint:'',
+              presentHistory:'',
+              presentTreatment:'',
+              pastHistory:'',
+              allergicHistory:'',
+              physicalExamination:'',
+              assistantExamination:'',
+            };
+          }
+
         },
         onCite(medicalRecordTemplateInfoItem){//引用模板
           if(this.medicalRecordState==="未初诊"){//可以引用

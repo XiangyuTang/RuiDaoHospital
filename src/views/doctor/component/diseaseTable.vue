@@ -115,16 +115,25 @@
         getDiseaseList(){
           console.log("请求疾病列表");
           let data = this.diseaseApi[this.type].getDiseaseParams;
-          this.$get(this.diseaseApi[this.type].getDiseaseApi, data).then(res=>{
-            console.log(res);
-            if(res.status === 'OK'){
-              this.items = res.data;//填充疾病列表数据
-              this.total = this.items.length;
-              this.isBusy = false;
-            }else{
-              console.log("加载失败");
-            }
-          });
+          // this.$get(this.diseaseApi[this.type].getDiseaseApi, data).then(res=>{
+          //   console.log(res);
+          //   if(res.status === 'OK'){
+          //     this.items = res.data;//填充疾病列表数据
+          //     this.total = this.items.length;
+          //     this.isBusy = false;
+          //   }else{
+          //     console.log("加载失败");
+          //   }
+          // });
+          this.items = [{'diseaseCode':800800,'diseaseIcd':101001,'diseaseName':'感冒'},
+          {'diseaseCode':800801,'diseaseIcd':101001,'diseaseName':'腹泻'},
+          {'diseaseCode':800802,'diseaseIcd':101002,'diseaseName':'中风'},
+          {'diseaseCode':800803,'diseaseIcd':101003,'diseaseName':'脑梗塞'},
+          {'diseaseCode':800804,'diseaseIcd':101004,'diseaseName':'心梗'},
+          {'diseaseCode':800805,'diseaseIcd':101005,'diseaseName':'高血压'},
+          {'diseaseCode':800806,'diseaseIcd':101006,'diseaseName':'关节炎'}];//填充疾病列表数据
+          this.total = this.items.length;
+          this.isBusy = false;
         },
       },
     }

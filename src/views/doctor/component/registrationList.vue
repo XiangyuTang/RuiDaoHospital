@@ -7,8 +7,8 @@
       <b-card class="mb-3 text-center" no-body >
         <b-row >
           <b-col >
-            <span><i class="fa fa-user"> 已选患者</i> : emmm</span>
-            &nbsp;
+            <span><i class="fa fa-user"> 已选患者</i> : {{selectedPatient?selectedPatient:'暂无'}}</span>
+            &nbsp;&nbsp;
             <span><a href="#" @click.prevent="refresh"><i class="fa fa-refresh fa-fw"></i></a></span>
            </b-col >
 
@@ -98,7 +98,7 @@
                     show-empty
                     hover
                     :aria-busy="isBusy"
-                    :items="items"
+                    :items="items1"
                     :fields1="registrationFields"
                     :current-page="currentPage"
                     :per-page="perPage"
@@ -119,7 +119,7 @@
                     <b-col md="12" class="my-1">
                       <b-pagination
                         v-model="currentPage"
-                        :total-rows="total"
+                        :total-rows="total1"
                         :per-page="perPage"
                         class="my-0"
                         size="sm"
@@ -139,15 +139,19 @@
 
 <script>
   import {mapState,mapMutations} from 'vuex';
+  import bus from '../../../store/doctorBus.js';
     export default {
       name: "registrationList",
       inject:["reload"],
       data() {
         return {
           curr_user:{medicalRecordId:'001',userId:'001',patientGender : '男'},
+          selectedPatient:null,
           isBusy: false,
-          items:[],
-          total:1,
+          items:[],//未诊
+          items1:[],//已诊
+          total:1,//未诊
+          total1:1,//已诊
           perPage: 5,
           pageOptions: [5, 10, 15],
           currentPage:1,// currentPage:1 表示当前页码为1
@@ -214,12 +218,17 @@
           this.currentPage = 1;
         },
         selectPatient(patient) {//选择一个患者
+          console.log(patient);
           let data = this.registrationTabs[this.currentTab].getChangeRegistrationParams;
           console.log("患者列表");
-          console.log(patient[0]);
-          data.medicalRecordId = patient[0].registrationId;
+          //console.log(patient[0].姓名);
+          this.selectedPatient = patient[0].姓名;
+          data.medicalRecordId = patient[0].病历号;
           data.userId = this.curr_user.userId;
           console.log(data);
+
+          bus.$emit("patientInfo",[patient[0].病历号,patient[0].姓名,"1","未诊"])
+
           // this.$get(this.registrationTabs[this.currentTab].getChangeRegistrationApi, data).then(res=>{
           //   console.log(res);
           //   if(res.status === "OK"){
@@ -244,11 +253,10 @@
           this.isBusy = false;
 
           patient[0].calculationTypeId = 1;
-          patient[0].patient.patientGender = '1'//this.curr_user.patientGender;
-          patient[0].medicalRecordId = '20190828001';
-          patient[0].patient.patientName = '黄方';
-          this.medicalRecordState = '确诊';
-
+          patient[0].medicalRecordId = patient[0].病历号;
+          patient[0].patientName = patient[0].姓名;
+          this.medicalRecordState = '1';
+          console.log('hahahahah:'+patient[0]);
           this.updateMedicalRecordState(this.transformMedicalRecordState(patient[0]));//更新就诊状态
           this.updateRegistration(patient[0]);
           //更新已选择的状态   用于显示
@@ -256,7 +264,7 @@
           selectedPatientItems.calculationTypeId = patient[0].calculationTypeId;//转义结算类别
           selectedPatientItems.patientGender = patient[0].patient.patientGender;//获得性别
           selectedPatientItems.medicalRecordId = patient[0].medicalRecordId;//病历ID
-          selectedPatientItems.patientName = patient[0].patient.patientName;//名字
+          selectedPatientItems.patientName = patient[0].patientName;//名字
           selectedPatientItems.medicalRecordState = this.medicalRecordState;//诊断状态
           this.updatePatient(selectedPatientItems);//更新vuex中的patient对象
           this.$emit('selectPatient', patient[0]);
@@ -281,11 +289,17 @@
           //     console.log("加载失败");
           //   }
           // });
-          this.items = [{病历号:'20190828001',姓名:'黄方'},{病历号:'20190828002',姓名:'霍飞'},
-                        {病历号:'20190828003',姓名:'冯水'},{病历号:'20190828004',姓名:'张弛'},
-                       {病历号:'20190828005',姓名:'何甜甜'},{病历号:'20190828006',姓名:'康有'},
-                       {病历号:'20190828007',姓名:'刘严飞'}];
+          //未诊患者名单
+          this.items = [{'病历号':'20190828001','姓名':'何清权'},{'病历号':'20190828002','姓名':'王演'},
+                        {'病历号':'20190828003','姓名':'宋捷'}];
           this.total = this.items.length;
+          //已诊患者名单
+          this.items1 = [{'病历号':'20190829001','姓名':'黄方'},{'病历号':'20190829002','姓名':'霍飞'},
+                        {'病历号':'20190829003','姓名':'冯水'},{'病历号':'20190829004','姓名':'张弛'},
+                       {'病历号':'20190829005','姓名':'何甜甜'},{'病历号':'20190829006','姓名':'康有'},
+                       {'病历号':'20190829007','姓名':'刘严飞'}];
+          this.total1 = this.items1.length;
+
           this.isBusy = false;
         },
         refresh(){

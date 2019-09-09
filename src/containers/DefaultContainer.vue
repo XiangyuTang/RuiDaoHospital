@@ -5,7 +5,7 @@
         <DefaultDropdownNav/>
       </b-navbar-nav> -->
       <b-link class="navbar-brand" to="#">
-        <img class="navbar-brand-full" src="img/brand/logo.svg" width="80" height="40" alt="CoreUI Logo">
+        <img class="navbar-brand-full" src="img/brand/logo.png" width="150" height="40" alt="CoreUI Logo">
         <!--<img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">-->
       </b-link>
       <b-navbar-nav >

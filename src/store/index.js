@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import doctor from './doctor'
+import doctorBus from './doctorBus'
 import common from './common'
 import basicInfo from './basicInfo'
 import pharmacy from './pharmacy'
 import register from './register'
 import tech from './tech'
 import statistics from './statistics'
+
 
 Vue.use(Vuex);
 
@@ -19,5 +21,6 @@ export default new Vuex.Store({
     pharmacy,
     tech,
     statistics,
+    doctorBus,
   }
 })

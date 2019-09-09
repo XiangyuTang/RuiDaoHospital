@@ -2,10 +2,10 @@ export default {
   namespaced:true,
   state:{
     curr_user_type:'',
-    curr_user_id:null,
-    curr_user:null,
-    curr_role:null,
-    curr_dept:null,
+    curr_user_id:1,
+    curr_user:"哈哈哈",
+    curr_role:"emm",
+    curr_dept:"adkja",
   },
   mutations:{
     set_curr_user_type(state, user_type){

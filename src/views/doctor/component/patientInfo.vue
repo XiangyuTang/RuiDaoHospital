@@ -24,6 +24,7 @@
 
 <script>
   import {mapState} from 'vuex';
+  import bus from '../../../store/doctorBus.js'
     export default {
       name: "patientInfo",
       data(){
@@ -32,7 +33,15 @@
         }
       },
       mounted:async function () {
+        var self = this;
+        bus.$on("patientInfo",function(msg){
+          self.initialPatient.medicalRecordId = msg[0];
+          self.initialPatient.patientName = msg[1];
+          self.initialPatient.patientGender = msg[2];
+          self.initialPatient.medicalRecordState = msg[3];
+        })
         await this.initPatient();
+
       },
       computed:{
         ...mapState("doctor",["patient"]),

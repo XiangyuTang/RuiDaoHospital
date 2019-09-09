@@ -104,7 +104,7 @@
             sortDesc: false,
             sortDirection: 'asc',
             filter: null,
-            selectedCommonlyUsedItems:{},//被选中的常用项目
+            selectedCommonlyUsedItems:{'diseaseIcd':101002,'diseaseName':'腹泻','diseaseCode':800801},//被选中的常用项目
           }
       },
       mounted: async function(){//挂载之后才开始填充数据
@@ -131,19 +131,29 @@
           this.currentPage = 1;
         },
         getCommonlyUsedList(){
-          this.commonlyUsedApi[this.commonlyUsedType].getCommonlyUsedParams.userId = this.curr_user.userId
+          this.commonlyUsedApi[this.commonlyUsedType].getCommonlyUsedParams.userId = 1
+          // this.commonlyUsedApi[this.commonlyUsedType].getCommonlyUsedParams.userId = this.curr_user.userId
           let data = this.commonlyUsedApi[this.commonlyUsedType].getCommonlyUsedParams;
           console.log(data);
-          this.$get(this.commonlyUsedApi[this.commonlyUsedType].getCommonlyUsedListApi, data).then(res=>{
-            console.log(res);
-            if(res.status === 'OK'){
-              this.items = res.data;
-              this.total = this.items.length;
-              this.isBusy = false;
-            }else{
-              console.log("加载失败");
-            }
-          });
+          // this.$get(this.commonlyUsedApi[this.commonlyUsedType].getCommonlyUsedListApi, data).then(res=>{
+          //   console.log(res);
+          //   if(res.status === 'OK'){
+          //     this.items = res.data;
+          //     this.total = this.items.length;
+          //     this.isBusy = false;
+          //   }else{
+          //     console.log("加载失败");
+          //   }
+          // });
+          this.items = [{'disease.diseaseIcd':101001,'diseaseName':'感冒','diseaseCode':800800},
+          {'diseaseIcd':101002,'diseaseName':'腹泻','diseaseCode':800801},
+          {'diseaseIcd':101003,'diseaseName':'中风','diseaseCode':800802},
+          {'diseaseIcd':101004,'diseaseName':'脑梗塞','diseaseCode':800803},
+          {'diseaseIcd':101005,'diseaseName':'心梗','diseaseCode':800804},
+          {'diseaseIcd':101006,'diseaseName':'高血压','diseaseCode':800805},
+          {'diseaseIcd':101007,'diseaseName':'关节炎','diseaseCode':800806}];//填充疾病列表数据
+          this.total = this.items.length;
+          this.isBusy = false;
         },
         deleteCommonlyUsedItems(){//删除常用项目
           if(JSON.stringify(this.selectedCommonlyUsedItems)=="{}"){//如果未选中项目
