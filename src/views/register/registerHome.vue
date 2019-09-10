@@ -1,7 +1,16 @@
 <template>
   <div class="animated fadeIn">
-    <b-row>
-      <b-col lg="3">
+    <b-col>
+      <b-col>
+        <RegisterForm
+          @refresh="refresh"
+          :department-list="departmentList"
+          :doctor-list="doctorList"
+          :patient-list="patientList"
+        >
+        </RegisterForm>
+      </b-col>
+      <b-col>
         <RegisterTable
           :caption="'挂号信息'"
           :initial-fields="fields"
@@ -10,17 +19,7 @@
           @withdraw="withdraw"
         ></RegisterTable>
       </b-col>
-      <b-col lg="9">
-        <RegisterForm
-          @refresh="refresh"
-          :department-list="departmentList"
-          :doctor-list="doctorList"
-          :patient-list="patientList"
-        >
-
-        </RegisterForm>
-      </b-col>
-    </b-row>
+    </b-col>
   </div>
 </template>
 
@@ -33,6 +32,11 @@
         data: () => {
           return{
             fields:[
+              {
+                key: 'medicalRecord.medicalRecordId',
+                sortable: true,
+                label: '病历号'
+              },
               {
                 key: 'patient.patientName',
                 sortable: true,
@@ -47,11 +51,6 @@
                 key: 'registrationLevel.registrationLevelName',
                 sortable: true,
                 label: '挂号级别'
-              },
-              {
-                key: 'medicalRecord.medicalRecordId',
-                sortable: true,
-                label: '病历号'
               },
               {
                 key: 'registrationStatus',
