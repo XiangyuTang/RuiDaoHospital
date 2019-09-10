@@ -227,7 +227,7 @@
           data.userId = this.curr_user.userId;
           console.log(data);
 
-          bus.$emit("patientInfo",[patient[0].病历号,patient[0].姓名,"1","未诊"])
+          bus.$emit("patientInfo",[patient[0].病历号,patient[0].姓名,"1","已诊"])
 
           // this.$get(this.registrationTabs[this.currentTab].getChangeRegistrationApi, data).then(res=>{
           //   console.log(res);

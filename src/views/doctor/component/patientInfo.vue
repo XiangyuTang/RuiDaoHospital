@@ -29,7 +29,7 @@
       name: "patientInfo",
       data(){
         return{
-          initialPatient:{medicalRecordState: "未选择", patientGender: "未选择", medicalRecordId: '未选择', patientName: '未选择', calculationTypeId:0},
+          initialPatient:{medicalRecordState: "未选择", patientGender: "未选择", medicalRecordId: '未选择', patientName: '未选择', calculationTypeId:1},
         }
       },
       mounted:async function () {
