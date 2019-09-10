@@ -1,16 +1,7 @@
 <template>
   <div class="animated fadeIn">
-    <b-row>
-      <b-col lg="3">
-        <RegisterTable
-          :caption="'挂号信息'"
-          :initial-fields="registrationFields"
-          :per-page="10"
-          :table-data="registrationList"
-          @showExpenseItems="showExpenseItems"
-        ></RegisterTable>
-      </b-col>
-      <b-col lg="9">
+    <b-col>
+      <b-col>
         <ChargeTable
           @refresh="refresh"
           :caption="'费用项目信息'"
@@ -20,7 +11,7 @@
         >
         </ChargeTable>
       </b-col>
-    </b-row>
+    </b-col>
   </div>
 </template>
 
