@@ -1,40 +1,46 @@
 <template>
   <b-card :header="caption">
     <b-row>
-      <b-col md="12" class="my-1">
-        <b-form-group label-cols-sm="1" label="Filter" class="mb-0">
+      <b-col md="3" class="my-1">
+        <b-form-group label-cols-sm="1" class="mb-0"
+                      description=""
+                      label="病历号"
+                      label-for="patientID"
+                      :label-cols="2"
+                      :horizontal="true">
           <b-input-group>
-            <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
+            <b-form-input v-model="filter" placeholder="请输入患者病历号"></b-form-input>
             <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+              <b-button :disabled="!filter" @click="filter = ''">清空</b-button>
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
       </b-col>
-    </b-row>
-    <b-row>
-      <b-col md="12" class="my-1">
-        <b-form-group label-cols-sm="1" label="Sort" class="mb-0">
-          <b-input-group>
-            <b-form-select v-model="sortBy" :options="sortOptions">
-              <option slot="first" :value="null">-- none --</option>
-            </b-form-select>
-            <b-form-select v-model="sortDesc" :disabled="!sortBy" slot="append">
-              <option :value="false">Asc</option> <option :value="true">Desc</option>
-            </b-form-select>
-          </b-input-group>
+      <b-col md="3" class="my-1">
+        <b-form-group
+          label="开始日期"
+          label-for="beginDate"
+          :label-cols="2">
+          <b-form-input  type="date" id="beginDate" ></b-form-input>
         </b-form-group>
       </b-col>
-    </b-row>
-    <b-row>
-      <b-col md="10" class="my-1"></b-col>
-      <b-col md="1" class="my-1">
+      <b-col md="3" class="my-1">
+        <b-form-group
+          label="结束日期"
+          label-for="endDate"
+          :label-cols="2">
+          <b-form-input  type="date" id="endDate"></b-form-input>
+        </b-form-group>
+      </b-col>
+      <b-col md="0.5" class="my-1">
         <b-button variant="outline-danger" class="" @click="balanceForRefund">退费</b-button>
       </b-col>
       <b-col md="1" class="my-1">
         <b-button variant="outline-success" class="" @click="balance">缴费</b-button>
       </b-col>
+
     </b-row>
+
     <b-table selectable select-mode="multi" @row-selected="selectItems" show-empty :dark="dark" :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" :busy="isBusy" responsive="sm" :items="items" :fields="captions" :filter="filter" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" @filtered="onFiltered" :current-page="currentPage" :per-page="perPage">
       <template slot="expenseItemsName" slot-scope="row">
         {{getExpenseItemsName(row.item)}}
@@ -48,6 +54,7 @@
       <template slot="payStatus" slot-scope="row">
         {{getPayStatus(row.item)}}
       </template>
+
     </b-table>
     <nav>
       <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" prev-text="Prev" next-text="Next" hide-goto-end-buttons></b-pagination>
@@ -59,11 +66,14 @@
 </template>
 
 <script>
+
     import RegisterModal from "./registerModal"
+
     import RefundModal from "./refundModal";
     export default {
         name: "ChargeTable",
         components:{RefundModal, RegisterModal},
+
         props:{
           caption: {
             type: String,
@@ -325,7 +335,12 @@
               }
             })
           },
-        }
+
+
+
+
+        },
+
     }
 </script>
 
