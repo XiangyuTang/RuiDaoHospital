@@ -1,33 +1,21 @@
 <template>
   <b-card :header="caption">
     <b-row>
-      <b-col md="12" class="my-1">
-        <b-form-group label-cols-sm="1" class="mb-0">
+      <b-col md="3" class="my-1">
+        <b-form-group label-cols-sm="1" class="mb-0"
+                      description=""
+                      label="病历号"
+                      label-for="patientID"
+                      :label-cols="2"
+                      :horizontal="true">
           <b-input-group>
-            <b-form-input v-model="filter" placeholder="请输入..."></b-form-input>
+            <b-form-input v-model="filter" placeholder="请输入患者病历号"></b-form-input>
             <b-input-group-append>
               <b-button :disabled="!filter" @click="filter = ''">清空</b-button>
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
       </b-col>
-    </b-row>
-    <b-row>
-      <b-col md="12" class="my-1">
-        <b-form-group label-cols-sm="1" class="mb-0">
-          <b-input-group>
-            <b-form-select v-model="sortBy" :options="sortOptions">
-              <option slot="first" :value="null">-- none --</option>
-            </b-form-select>
-            <b-form-select v-model="sortDesc" :disabled="!sortBy" slot="append">
-              <option :value="false">Asc</option> <option :value="true">Desc</option>
-            </b-form-select>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col md="8" class="my-1"></b-col>
       <b-col md="4" class="my-1">
         <b-button variant="outline-danger" class="" @click="withdraw">退号</b-button>
       </b-col>
