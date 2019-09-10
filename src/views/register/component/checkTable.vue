@@ -2,21 +2,6 @@
   <b-card :header="caption">
     <b-row>
       <b-col md="3" class="my-1">
-        <b-form-group label-cols-sm="1" class="mb-0"
-                      description=""
-                      label="病历号"
-                      label-for="patientID"
-                      :label-cols="2"
-                      :horizontal="true">
-          <b-input-group>
-            <b-form-input v-model="filter" placeholder="请输入患者病历号"></b-form-input>
-            <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''">清空</b-button>
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
-      <b-col md="3" class="my-1">
         <b-form-group
           label="开始日期"
           label-for="beginDate"
