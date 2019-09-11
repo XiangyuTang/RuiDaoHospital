@@ -32,11 +32,10 @@
           <b-form-input  type="date" id="endDate"></b-form-input>
         </b-form-group>
       </b-col>
-      <b-col md="0.5" class="my-1">
-        <b-button variant="outline-danger" class="" @click="balanceForRefund">退费</b-button>
-      </b-col>
-      <b-col md="1" class="my-1">
-        <b-button variant="outline-success" class="" @click="balance">缴费</b-button>
+      <b-col>
+        <b-button class="pull-right" type="reset"  variant="danger" @click="reset"><i class="fa fa-ban"></i> 清空</b-button>
+        <b-button class="pull-right" type="submit"  variant="primary" @click="submit"><i class="fa fa-dot-circle-o"></i> 查询</b-button>
+
       </b-col>
 
     </b-row>

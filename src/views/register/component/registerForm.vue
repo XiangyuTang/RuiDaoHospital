@@ -5,8 +5,9 @@
     </div>
     <div>
       <span style="font-style: italic"><strong>患者信息</strong></span>
-      <b-button class="pull-right" type="submit" size="sm" variant="primary" @click="submit"><i class="fa fa-dot-circle-o"></i> 提交</b-button>
-      <b-button class="pull-right" type="reset" size="sm" variant="danger" @click="reset"><i class="fa fa-ban"></i> 清空</b-button>
+      <b-button class="pull-right" type="reset"  variant="danger" @click="reset"><i class="fa fa-ban"></i> 清空</b-button>
+      <b-button class="pull-right" type="submit"  variant="primary" @click="submit"><i class="fa fa-dot-circle-o"></i> 提交</b-button>
+
     </div>
     <br/>
     <div style="background:linear-gradient(to left,#efefef,#b6b6b6);height:1px;"></div>
@@ -25,10 +26,7 @@
             label-for="patientIdentity"
             :label-cols="2"
             :horizontal="true">
-            <b-form-input :state="idState" v-model="patient.patientIdentity" id="patientIdentity" type="text" placeholder="请输入患者身份证号"></b-form-input>
-            <b-form-invalid-feedback id="patientIdentity">
-              请正确输入18位身份证号
-            </b-form-invalid-feedback>
+            <b-form-input  v-model="patient.patientIdentity" id="patientIdentity" type="text" placeholder="请输入患者身份证号"></b-form-input>
           </b-form-group>
         </b-col>
         <b-col md="3">
@@ -38,13 +36,19 @@
             label-for="patientName"
             :label-cols="2"
             :horizontal="true">
-            <b-form-input :state="nameState" v-model="patient.patientName" id="patientName" type="text" autocomplete="name" placeholder="请输入患者姓名"></b-form-input>
-            <b-form-invalid-feedback id="patientIdentity">
-              请输入两字以上姓名
-            </b-form-invalid-feedback>
+            <b-form-input  v-model="patient.patientName" id="patientName" type="text" autocomplete="name" placeholder="请输入患者姓名"></b-form-input>
           </b-form-group>
         </b-col>
-
+        <b-col md="3">
+        <b-form-group
+          description=""
+          label="家庭住址"
+          label-for="homeDress"
+          :label-cols="2"
+          :horizontal="true">
+          <b-form-input  v-model="patient.homeDress" id="homeDress" type="text" autocomplete="dress" placeholder="请输入患者家庭住址"></b-form-input>
+        </b-form-group>
+        </b-col>
       </b-row>
 
       <div>
