@@ -2,8 +2,8 @@
 const DefaultContainer = () => import('../containers/DefaultContainer');
 
 //Pharmacy
-// const PharmacyHome = () => import('../views/pharmacy/pharmacy');
 const pharmacy = () => import("../views/pharmacy/pharmacy");
+const catalog = () => import("../views/pharmacy/catalogue");
 
 export default {
   path:'/pharmacy',
@@ -13,8 +13,13 @@ export default {
   children: [
     {
       path: '/pharmacy/pharmacy',
-      name: 'pharmacyHome',
+      name: 'pharmacy',
       component: pharmacy
+    },
+    {
+      path: '/pharmacy/catalogue',
+      name: 'catalogue',
+      component: catalog
     }
   ]
 }

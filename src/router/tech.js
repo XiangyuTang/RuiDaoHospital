@@ -3,7 +3,6 @@ const DefaultContainer = () => import('../containers/DefaultContainer');
 
 //Tech
 const Tech = () => import('../views/tech/tech');
-const commonlyUsedItems = () =>import('../views/tech/commonlyUsedItems');
 
 export default {
   path:'/tech',
@@ -15,11 +14,6 @@ export default {
       path:'tech',
       name:'tech',
       component:Tech
-    },
-    {
-      path:'/tech/commonlyUsedItems',
-      name:'commonlyUsedItems',
-      component:commonlyUsedItems
     }
   ],
 }
