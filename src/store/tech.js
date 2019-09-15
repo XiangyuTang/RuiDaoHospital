@@ -1,38 +1,32 @@
 export default {
   namespaced:true,
   state:{
-    counter:1,
-    patientInfo:"",
-    DepartmentId:-1,
-  },
-  getters:{
-    getPatientInfo:state=>{
-      return state.patientInfo;
-    },
-    getDepartmentId:state=>{
-      return state.DepartmentId;
-    }
+    patient:{ medicalRecordId: "未选择", patientName: "未选择", patientGender: '未选择', patientAge: '未选择', calculationTypeId:'未选择' },
+    techItem: {},
+    isItemUpdate: false
   },
   mutations:{
-    setCounter:function(state, n){
-      state.counter += n;
+    selectPatient(state, selectedPatient) {
+      // console.log(selectedPatient);
+      state.patient = selectedPatient;
     },
-    // 将登录患者的信息存储
-    setState:function (state, patientInfo) {
-      state.patientInfo = patientInfo;
-      // state.patientInfo.MedicalRecordID=patientInfo.MedicalRecordID;
-      // state.patientInfo.patientId=patientInfo.patientId;
-      // state.patientInfo.patientName=patientInfo.patientName;
-      // state.patientInfo.patientGender=patientInfo.patientGender;
-      // state.patientInfo.patientBirth=patientInfo.patientBirth;
-      // state.patientInfo.patientAge=patientInfo.patientAge;
-      // state.patientInfo.patientIdentity=patientInfo.patientIdentity;
-      // state.patientInfo.patientAddress=patientInfo.patientAddress;
+    selectTech(state, selectedItem) {
+      // console.log(selectedItem);
+      state.techItem = selectedItem;
+      state.isItemUpdate = false;
+    },
+    techItemRegister(state) {
+      state.techItem.itemState = 1;
+      state.techItem.itemStateStr = '已登记';
+      state.isItemUpdate = true;
+    },
+    techItemCancel(state) {
+      state.techItem.itemState = 2;
+      state.techItem.itemStateStr = '已取消';
+      state.isItemUpdate = true;
     }
   },
   action:{
-    change(){
-      return 'bbb';
-    }
+
   }
 }

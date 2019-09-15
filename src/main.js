@@ -12,6 +12,8 @@ import Vuex from 'vuex'
 import store from './store'
 import moment from 'moment'
 // import Vuetree from 'vue-simple-tree'
+import Calendar from 'vue2-datepick';
+Vue.use(Calendar);
 
 
 Vue.prototype.$get=fetch;
@@ -28,6 +30,7 @@ Vue.directive('focus',{
     el.focus();
   }
 })
+
 if (process.env.NODE_ENV === 'development') {
   start_mock();
 }

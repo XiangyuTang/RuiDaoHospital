@@ -1,6 +1,12 @@
 export default {
   namespaced:true,
   state:{
-    curr_user:{}
+    patient:{ medicalRecordId: "未选择", patientName: "未选择", patientGender: '未选择', patientAge: '未选择', calculationTypeId:'未选择' },
   },
+  mutations: {
+    selectPatient(state, selectedPatient) {
+      // console.log(selectedPatient);
+      state.patient = selectedPatient;
+    },
+  }
 }
