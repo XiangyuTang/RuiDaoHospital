@@ -6,7 +6,7 @@
                       description=""
                       label="病历号"
                       label-for="patientID"
-                      :label-cols="2"
+                      :label-cols="3"
                       :horizontal="true">
           <b-input-group>
             <b-form-input v-model="filter" placeholder="请输入患者病历号"></b-form-input>
@@ -20,7 +20,7 @@
         <b-form-group
           label="开始日期"
           label-for="beginDate"
-          :label-cols="2">
+          :label-cols="3">
           <b-form-input  type="date" id="beginDate" ></b-form-input>
         </b-form-group>
       </b-col>
@@ -28,7 +28,7 @@
         <b-form-group
           label="结束日期"
           label-for="endDate"
-          :label-cols="2">
+          :label-cols="3">
           <b-form-input  type="date" id="endDate"></b-form-input>
         </b-form-group>
       </b-col>

@@ -1,14 +1,14 @@
 export default [
   {
-    name: '挂号',
+    name: '挂号退号',
     url: '/register/registerHome'
   },
   {
-    name: '收费',
+    name: '收费退费',
     url: '/register/chargeHome'
   },
   {
-    name: '开具发票',
+    name: '发票',
     url: '/register/billHome'
   },
   {

@@ -55,12 +55,23 @@
       </template>
 
     </b-table>
+    <b-row>
+      <b-col>
     <nav>
       <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" prev-text="Prev" next-text="Next" hide-goto-end-buttons></b-pagination>
     </nav>
     <RegisterModal   @register="charge" :total-cost="totalCost">
     </RegisterModal>
     <RefundModal @refund="refund" :total-cost="totalCost"></RefundModal>
+      </b-col>
+      <b-col>
+    <b-row md="4" class="my-1">
+      <b-button variant="outline-danger" class="" @click="withdraw">打印发票</b-button>
+      <b-button variant="outline-danger" class="" @click="withdraw">补打发票</b-button>
+      <b-button variant="outline-danger" class="" @click="withdraw">重打发票</b-button>
+    </b-row>
+      </b-col>
+</b-row>
   </b-card>
 </template>
 

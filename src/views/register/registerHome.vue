@@ -12,7 +12,7 @@
       </b-col>
       <b-col>
         <RegisterTable
-          :caption="'挂号信息'"
+          :caption="'退号'"
           :initial-fields="fields"
           :per-page="10"
           :table-data="items"
@@ -41,6 +41,11 @@
                 key: 'patient.patientName',
                 sortable: true,
                 label: '患者姓名'
+              },
+              {
+                key: 'patient.patientIdentity',
+                sortable: true,
+                label: '身份证号'
               },
               {
                 key: 'department.departmentName',

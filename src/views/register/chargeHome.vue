@@ -1,7 +1,9 @@
 <template>
   <div class="animated fadeIn">
-    <b-col>
-      <b-col>
+
+    <b-row>
+
+      <b-col lg = 8>
         <ChargeTable
           @refresh="refresh"
           :caption="'费用项目信息'"
@@ -11,7 +13,83 @@
         >
         </ChargeTable>
       </b-col>
-    </b-col>
+      <b-col>
+        <b-card>
+          <div slot="header">
+            收费
+          </div>
+
+          <b-col md="10">
+            <b-form-group
+              description=""
+              label="应收金额"
+              label-for="ymoney"
+              :label-cols="2"
+              :horizontal="true">
+              <b-form-input  id="ymoney" type="text" autocomplete="ymoney"  disabled = "disabled"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="10">
+            <b-form-group
+              description=""
+              label="实收金额"
+              label-for="smoney"
+              :label-cols="2"
+              :horizontal="true">
+              <b-form-input   id="smoney" type="text" autocomplete="smoney"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="10">
+            <b-form-group
+              description=""
+              label="找零金额"
+              label-for="zmoney"
+              :label-cols="2"
+              :horizontal="true">
+              <b-form-input   id="money" type="text" autocomplete="zmoney"  disabled = "disabled"></b-form-input>
+            </b-form-group>
+          </b-col>
+
+          <b-col md="4" class="my-1">
+            <b-button variant="outline-danger" class="" @click="withdraw">收费</b-button>
+          </b-col>
+
+          <br/>
+        </b-card>
+        <b-card>
+          <div slot="header">
+            退费
+          </div>
+
+          <b-col md="10">
+            <b-form-group
+              description=""
+              label="应退金额"
+              label-for="ymoney"
+              :label-cols="2"
+              :horizontal="true">
+              <b-form-input  id="ymoney" type="text" autocomplete="ymoney"  disabled = "disabled"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="10">
+            <b-form-group
+              description=""
+              label="实退金额"
+              label-for="smoney"
+              :label-cols="2"
+              :horizontal="true">
+              <b-form-input   id="smoney" type="text" autocomplete="smoney"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="4" class="my-1">
+            <b-button variant="outline-danger" class="" @click="withdraw">退费</b-button>
+          </b-col>
+
+          <br/>
+        </b-card>
+      </b-col>
+
+    </b-row>
   </div>
 </template>
 
@@ -23,34 +101,18 @@
         components:{RegisterTable,ChargeTable},
         data: () => {
           return{
-            registrationFields:[
-              {
-                key: 'patient.patientName',
-                sortable: true,
-                label: '患者姓名'
-              },
-              {
-                key: 'department.departmentName',
-                sortable: true,
-                label: '所挂科室'
-              },
-              {
-                key: 'registrationLevel.registrationLevelName',
-                sortable: true,
-                label: '挂号级别'
-              },
+
+            expenseItemsFields: [
               {
                 key: 'medicalRecord.medicalRecordId',
                 sortable: true,
                 label: '病历号'
               },
               {
-                key: 'registrationStatus',
+                key: 'patient.patientName',
                 sortable: true,
-                label: '挂号状态'
+                label: '患者姓名'
               },
-            ],
-            expenseItemsFields: [
               //是药品就显示药品名 是非药品就显示非药品名  如何实现？ 插槽？
               {
                 key: 'expenseItemsName',
@@ -71,17 +133,12 @@
               {
                 key: 'totalCost',
                 sortable: true,
-                label: '项目费用(/元)'
-              },
-              {
-                key: 'expenseType.expenseTypeName',
-                sortable: true,
-                label: '费用科目名称'
+                label: '费用(元)'
               },
               {
                 key: 'payStatus',
                 sortable: true,
-                label: '缴费状态'
+                label: '状态'
               },
             ],
             registrationList: [],

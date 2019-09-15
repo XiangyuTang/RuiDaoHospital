@@ -23,65 +23,39 @@
     components:{RegisterTable,BillTable},
     data: () => {
       return{
-        registrationFields:[
-          {
-            key: 'patient.patientName',
-            sortable: true,
-            label: '患者姓名'
-          },
-          {
-            key: 'department.departmentName',
-            sortable: true,
-            label: '所挂科室'
-          },
-          {
-            key: 'registrationLevel.registrationLevelName',
-            sortable: true,
-            label: '挂号级别'
-          },
-          {
-            key: 'medicalRecord.medicalRecordId',
-            sortable: true,
-            label: '病历号'
-          },
-          {
-            key: 'registrationStatus',
-            sortable: true,
-            label: '挂号状态'
-          },
-        ],
+
         expenseItemsFields: [
           //是药品就显示药品名 是非药品就显示非药品名  如何实现？ 插槽？
           {
             key: 'expenseItemsName',
             sortable: true,
-            label: '项目名称'
+            label: '缴费单号'
           },
           {
             key: 'quantity',
             sortable: true,
-            label: '开立数量'
+            label: '病历号'
           },
           //缴费时 实际肯定=开立（缴费前改处方 直接废除 开新的） 退费时检查 开立-实际
           {
             key: 'actualQuantity',
             sortable: true,
-            label: '实际数量'
+            label: '患者姓名'
           },
           {
             key: 'totalCost',
             sortable: true,
-            label: '项目费用(/元)'
+            label: '花费'
           },
           {
             key: 'expenseType.expenseTypeName',
             sortable: true,
-            label: '费用科目名称'
+            label: '开立时间'
           },
           {
             key: 'payStatus',
             sortable: true,
-            label: '缴费状态'
+            label: '发票状态'
           },
         ],
         registrationList: [],

@@ -1,5 +1,6 @@
 <template>
   <b-card :header="caption">
+
     <b-row>
       <b-col md="3" class="my-1">
         <b-form-group label-cols-sm="1" class="mb-0"
@@ -20,6 +21,7 @@
         <b-button variant="outline-danger" class="" @click="withdraw">退号</b-button>
       </b-col>
     </b-row>
+
     <b-table selectable select-mode="single" @row-selected="selectItem" show-empty :dark="dark" :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" :busy="isBusy" responsive="sm" :items="items" :fields="captions" :filter="filter" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" @filtered="onFiltered" :current-page="currentPage" :per-page="perPage">
       <template slot="registrationStatus" slot-scope="row">
         {{getType(row.item)}}

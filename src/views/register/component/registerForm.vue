@@ -1,24 +1,25 @@
 <template>
   <b-card>
     <div slot="header">
-      挂号表单
+      挂号
     </div>
     <div>
       <span style="font-style: italic"><strong>患者信息</strong></span>
       <b-button class="pull-right" type="reset"  variant="danger" @click="reset"><i class="fa fa-ban"></i> 清空</b-button>
-      <b-button class="pull-right" type="submit"  variant="primary" @click="submit"><i class="fa fa-dot-circle-o"></i> 提交</b-button>
+      <b-button class="pull-right" type="submit"  variant="primary" @click="submit"><i class="fa fa-dot-circle-o"></i> 挂号</b-button>
 
     </div>
     <br/>
     <div style="background:linear-gradient(to left,#efefef,#b6b6b6);height:1px;"></div>
     <br/>
 
-    <b-form>
-
-      <b-row>
       <b-col md="1">
         <b-button variant="outline-Dark" class="btn btn-outline-dark btn-block" @click="getPatient">身份证读卡</b-button>
       </b-col>
+     <br/>
+
+    <b-form>
+      <b-row>
         <b-col md="3">
           <b-form-group
             description=""
@@ -50,7 +51,38 @@
         </b-form-group>
         </b-col>
       </b-row>
-
+      <b-row>
+        <b-col md="3">
+          <b-form-group
+          description=""
+          label="患者性别"
+          label-for="xingBie"
+          :label-cols="2"
+          :horizontal="true">
+          <b-form-input  v-model="patient.xingBie" id="xingBie" type="text" autocomplete="xingBie" disabled = "disabled"></b-form-input>
+        </b-form-group>
+        </b-col>
+        <b-col md="3">
+          <b-form-group
+            description=""
+            label="患者年龄"
+            label-for="age"
+            :label-cols="2"
+            :horizontal="true">
+            <b-form-input  v-model="patient.age" id="age" type="text" autocomplete="age"  disabled = "disabled"></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col md="3">
+          <b-form-group
+            description=""
+            label="出生日期"
+            label-for="birthday"
+            :label-cols="2"
+            :horizontal="true">
+            <b-form-input  v-model="patient.birthday" id="birthday" type="text" autocomplete="birthday"  disabled = "disabled"></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
       <div>
         <span style="font-style: italic"><strong>挂号信息</strong></span>
       </div>
@@ -145,6 +177,45 @@
                 <label class="custom-control-label" for="no">否</label>
               </div>
             </b-form-radio-group>
+          </b-form-group>
+        </b-col>
+
+      </b-row>
+      <div>
+        <span style="font-style: italic"><strong>挂号缴费</strong></span>
+      </div>
+      <br/>
+      <div style="background:linear-gradient(to left,#efefef,#b6b6b6);height:1px;"></div>
+      <br/>
+      <b-row>
+      <b-col md="3">
+        <b-form-group
+          description=""
+          label="应收金额"
+          label-for="ymoney"
+          :label-cols="2"
+          :horizontal="true">
+          <b-form-input  v-model="patient.ymoney" id="ymoney" type="text" autocomplete="ymoney"  disabled = "disabled"></b-form-input>
+        </b-form-group>
+      </b-col>
+        <b-col md="3">
+          <b-form-group
+            description=""
+            label="实收金额"
+            label-for="smoney"
+            :label-cols="2"
+            :horizontal="true">
+            <b-form-input  v-model="patient.smoney" id="smoney" type="text" autocomplete="smoney"></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col md="3">
+          <b-form-group
+            description=""
+            label="找零金额"
+            label-for="zmoney"
+            :label-cols="2"
+            :horizontal="true">
+            <b-form-input  v-model="patient.zmoney" id="money" type="text" autocomplete="zmoney"  disabled = "disabled"></b-form-input>
           </b-form-group>
         </b-col>
       </b-row>
