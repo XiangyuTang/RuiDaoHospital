@@ -7,7 +7,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col lg="3">
+      <b-col lg="4">
         <!--  挂号列表-->
         <registration-list
           @selectPatient="selectPatient"
@@ -20,7 +20,7 @@
 
         </group-prescription>
       </b-col>
-      <b-col lg="9">
+      <b-col lg="8">
         <b-card header="成药处方" >
           <div slot="header"><!-- slot设置插槽便于模板数据的精准插入-->
             填写模块
@@ -525,7 +525,7 @@
               break;
             }
           }
-        },  
+        },
         selectPatient(){//选择患者
           //do nothing
           if(this.medicalRecordState==="未初诊"||this.medicalRecordState==="诊毕"){
